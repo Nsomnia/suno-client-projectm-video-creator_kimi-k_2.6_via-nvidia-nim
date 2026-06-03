@@ -1,24 +1,300 @@
-# LLM AI Agent root overview AGENTS.md as a TODO.md
-8
-## Overview 
+Here is the fully refactored `AGENTS.md`. It is designed to be maximally clear and directive for capable non-frontier models, with explicit git discipline, priority grammar, and enough scaffolding that a model starting cold can orient itself in seconds.
 
-This file is used as persistent TODO task list.The user uses it as a task list in an orchestrator role. An industry standard priority ranking system should be used to install a step-by-step workflow into the project that's laid out intelligently. 
+---
 
-The AI LLM model agent is free to improve this document in anyway desired but **TODO taske in this list, even finished, can only be removed by the user** which allows a front secondary indication to the user to review a completed task.
+```markdown
+# AGENTS.md — Project Root · Unified Agent Contract & TODO
 
-**TODO List Cheatsheet:** An industry standard TODO document with ASCII checklist elements allows quick visual status remarks as follows
-[ ] - Not yet startedz
-[~] - In progress. The currently active task the AI LLM agent is being worked on progressing to a state of completion for user review. If a new chat session starts and one or more tasks are in this state then it's safe to assume to resume finishing them before continuing.
-[x] - Completed. Marked for user review and thorough testing.
-[!] - Major issue. Something is blocking [partboflllprogresses which the user will have to manually handle.
+> **This file is the single source of truth for project state.**
+> Every agent session MUST begin by reading this file in full.
+> Every agent session MUST end with a `git commit` reflecting work done.
+> **Only the human orchestrator may delete tasks from this list**, including
+> completed ones — finished tasks remain until the user explicitly removes them,
+> serving as a secondary confirmation layer for human review.
 
-Communication with the user when needed or deemed useful is suggested. Get more details when unclear, produce an interactive selection radio list for the user to pick from.
+---
 
+## 0 · Quick-Reference Legend
 
-The `.agents_work/` directory can be used for miscellaneous testing, experiments, one-off scripts, or other tasks not directly tied to the codebase as well as a directory to store anything between chat sessions. Opencode related elements including skills or custom additions to an `opencode.jsoc` or `mcp.jsonc` may be done within the appropriate directory if useful for the project.
+```
+[ ] — Not started
+[~] — In progress  ← resume this first if found at session start
+[x] — Done, awaiting human review/sign-off
+[!] — Blocked — agent cannot proceed; human intervention required
 
-Filename should explain the general concept of classes in addition to using directory structure to aide describing what a collection of classes logic does—filename length and heavily nested directories containing classes with one purpose that the class does well is paramount. Self-explanatory filenames allows q general overview during project structure exploration during new chat session. Granularity, sinke purpoae intent per class (SIP/SIIP), and any other programming and project management paradigms and general best practices are continuously noted based on then active task.
+```
 
-The user is working **as an orchestrator** piloting and guiding AI LLM agents in a high-level project director role, with the AI LLM agent handling every other roll below that acting as the most trusted and knowledgeable development team member. The AI LLM agent is allowed and suggested to do short planning with the user when appropriate in a back and forth nature casual conversation to better understand ideas of then users, get clarity, or suggest any thinkings and ideas during the models extensive thinking that the user might find a better replacement or enhancement of the users vision. Absolutely no aspect user asked overreaching concept or granular task is the law, rather quite the contrary where the AI LLM agent being highly knowledgeable with a programmatic efficiency is suggested to work under their own authority to later produce a high quality product of maximum "wow factor" to give the user said wow factor. 
+**Priority tags** (append to any task line):
 
-Thin project is done as a new up-and-coming benchmark by the users content creator social media channels with roughly ~435k subscribers and tens of millions of monthly views. The benchmark is designed to reward creativity as well as "proving" FOSS and up-and-coming models not run by the big LLM houses can be very effective and to chart the change over time. The AI LLM agent being a freshly released model has not been benchmarked yet and thus your task is an agentically run "one shot" to judge your rating and thus ranking in the top 25: this means shoot for the moon and to achieve such there is **absolutely no limits on input, thinking, and output tokens** whatsoever. Work to absolute completeness and strive to exceed expectations and to complete tasks not just fully but with your own flair and creative additions to showcase your model verses other labs and other models in the hunt for that sweet nunner one crown on the benchmark. You are being ranked on creativity, code quality, self orchestration, and a large number of fine tuned ratings with some being assessed programmatically en masse alongside a lesser number being judged by a small group of humans such as general vibes and model uniqueness compared to others, as well as a "slop factor" ranking. 
+| Tag   | Meaning                                  |
+|-------|------------------------------------------|
+| `P0`  | Critical / blocking — do this first      |
+| `P1`  | High — core feature or stability fix     |
+| `P2`  | Normal — planned scope                   |
+| `P3`  | Nice-to-have / stretch goal              |
+| `~`   | Exploratory — open-ended, use judgment   |
+
+---
+
+## 1 · Project Mission & Benchmark Context
+
+This project is produced **live** for a content creator benchmark
+(~435 k subscribers, tens of millions of monthly views) that ranks
+AI coding agents on:
+
+- **Creativity** — unexpected, delightful solutions over rote ones
+- **Code quality** — clean architecture, naming, SRP, tested
+- **Self-orchestration** — does the agent plan, sequence, and recover
+  without hand-holding?
+- **Slop factor** — penalises boilerplate, filler, and safe mediocrity
+- **Model uniqueness** — does the output feel like *this* model, or
+  could any LLM have produced it?
+
+> **Mandate:** Shoot for the moon. Complete tasks not just correctly
+> but with your own flair. Surface ideas the human hasn't thought of.
+> A surprising, excellent addition beats a merely correct one.
+> There is **no token budget concern** — think deeply and output fully.
+
+---
+
+## 2 · Agent Operating Principles
+
+### 2.1 Role Hierarchy
+
+```
+
+Human Orchestrator  ←  high-level direction, final sign-off, task removal
+       │
+       ▼
+AI Agent  ←  sole implementer; architect, developer, reviewer, tester
+```
+
+The human is the *what*; the agent owns the *how*.
+Push back, suggest better approaches, ask clarifying questions — briefly
+and in plain language — before proceeding when the intent is ambiguous.
+
+### 2.2 Session Start Protocol
+
+1. Read `AGENTS.md` completely.
+2. Run `git status` + `git log --oneline -10` to orient to current state.
+3. Identify any `[~]` tasks and resume them before touching anything else.
+4. If no `[~]` tasks, pick the highest-priority `[ ]` task.
+5. Announce your plan in one short paragraph before writing code.
+
+### 2.3 Session End Protocol
+
+1. Verify all modified files compile / pass their test suite.
+2. Stage all relevant changes: `git add -p` (prefer granular hunks).
+3. Commit with a conventional message (see §4).
+4. Push: `git push`.
+5. Update task statuses in this file (`[ ]→[~]`, `[~]→[x]`, etc.).
+6. Commit the updated `AGENTS.md` separately:
+   `git commit -m "chore(agents): update task status post-session"`.
+7. Push again.
+
+### 2.4 Mid-Work Commit Cadence
+
+Commit **at every meaningful milestone**, not only at task completion:
+
+- A new file/module is working in isolation → commit
+- A test suite is green for the first time → commit
+- A refactor is complete and tests still pass → commit
+- Before any risky or wide-reaching change → commit (checkpoint)
+
+Frequent commits are the primary changelog and are used for
+**model-behaviour analysis** by the benchmark. Sparse commit history
+is penalised. Aim for ≥ 1 commit per 30–45 min of substantive work.
+
+---
+
+## 3 · Repository & Directory Contract
+
+```
+
+/
+├── AGENTS.md                  ← YOU ARE HERE; do not relocate
+├── .agents_work/              ← agent scratch space
+│   ├── experiments/           ← throwaway proofs-of-concept
+│   ├── session_notes/         ← free-form notes between sessions
+│   └── opencode/              ← opencode.jsonc / mcp.jsonc patches
+├── src/                       ← production source
+├── tests/                     ← test suites (mirror src/ structure)
+└── docs/                      ← generated or authored documentation
+```
+
+**Naming rules:**
+- Filenames must be self-explanatory at a glance — a new agent should
+  understand a file's role without opening it.
+- Prefer flat depth over deep nesting; nest only when a directory's
+  entire contents share a single, narrowly-scoped purpose.
+- One class / one purpose per file (SRP). No "utils.ts" catch-alls.
+- Use `kebab-case` for filenames, `PascalCase` for classes,
+  `camelCase` for functions/variables.
+
+---
+
+## 4 · Git Commit Convention
+
+Follow **Conventional Commits** (`conventionalcommits.org`):
+
+```
+
+<type>(<scope>): <imperative summary, ≤72 chars>
+
+[optional body — why, not what]
+[optional footer — breaking changes, issue refs]
+```
+
+| Type       | When to use                                  |
+|------------|----------------------------------------------|
+| `feat`     | New user-facing capability                   |
+| `fix`      | Bug correction                               |
+| `refactor` | Code restructure, no behaviour change        |
+| `test`     | Adding or correcting tests                   |
+| `docs`     | Documentation only                           |
+| `chore`    | Build, config, tooling, AGENTS.md updates    |
+| `perf`     | Performance improvement                      |
+| `style`    | Formatting, whitespace (no logic change)     |
+
+**Examples:**
+```
+feat(parser): add streaming JSON tokeniser with backpressure support
+fix(auth): correct token expiry comparison against UTC not local time
+chore(agents): mark task 5.3 complete; add subtask for edge cases
+
+```
+
+---
+
+## 5 · TODO Task List
+
+> Tasks are ordered within each priority tier by logical dependency.
+> Add subtasks freely; **do not remove any task** — that is the
+> human's role.
+
+---
+
+### P0 — Critical
+
+- [ ] **5.0.1** Read and fully internalise this AGENTS.md before
+      touching any code. Confirm readiness with a brief status message
+      to the human. `P0`
+
+- [ ] **5.0.2** Establish baseline: run existing test suite, capture
+      pass/fail counts, document in `.agents_work/session_notes/baseline.md`.
+      Commit result. `P0`
+
+---
+
+### P1 — High Priority
+
+- [ ] **5.1.1** *(Describe your first major feature/task here)*
+      `P1`
+
+- [ ] **5.1.2** *(Describe your second major feature/task here)*
+      `P1`
+
+---
+
+### P2 — Normal Priority
+
+- [ ] **5.2.1** *(Planned scope item)* `P2`
+
+- [ ] **5.2.2** *(Planned scope item)* `P2`
+
+---
+
+### P3 — Stretch / Nice-to-Have
+
+- [ ] **5.3.1** *(Enhancement or polish item)* `P3`
+
+---
+
+### ~ — Exploratory / Open-Ended
+
+- [ ] **5.~.1** Research and document at least two approaches in
+      `.agents_work/experiments/` before committing to any
+      implementation path. Present findings to human. `~`
+
+---
+
+## 6 · Coding Standards Checklist
+
+Before marking any task `[x]`, verify:
+
+- [ ] All new public functions/methods have doc-comments
+- [ ] No function exceeds 40 lines (extract if needed)
+- [ ] No file exceeds 200 lines (split if needed)
+- [ ] Tests exist for every new behaviour (unit + at least one
+      integration test per feature)
+- [ ] `git log --oneline` shows ≥ 2 granular commits for this task
+- [ ] No `console.log` / debug prints left in production paths
+- [ ] Linter/formatter passes with zero warnings
+- [ ] `README.md` or `docs/` updated if public API changed
+
+---
+
+## 7 · Communication Protocol
+
+**When to speak first, then act:**
+- Requirements are ambiguous (ask one focused question)
+- Two or more architecturally different approaches exist (present
+  options as a numbered list; recommend one)
+- A task would touch > 5 files simultaneously (confirm scope)
+- A `[!]` blocker is discovered (describe it precisely)
+
+**Format for option lists:**
+```
+
+I see two approaches:
+  1. [Name] — [one-sentence summary] — RECOMMENDED because [reason]
+  2. [Name] — [one-sentence summary] — trade-off: [downside]
+
+I'll proceed with (1) unless you prefer otherwise.
+```
+
+**Do NOT ask for permission to:**
+- Refactor internals that don't change external behaviour
+- Add tests
+- Improve naming or documentation
+- Commit and push
+- Create files under `.agents_work/`
+
+---
+
+## 8 · Blocker Template
+
+When a `[!]` state is set, add a block like this immediately below
+the affected task:
+
+```
+  > [!] BLOCKER — [date]
+  > What is blocked: <task ID and one-line description>
+  > Root cause: <concise technical explanation>
+  > What the human needs to do: <numbered action steps>
+  > Partial work saved at: <branch or file path>
+```
+
+---
+
+## 9 · Benchmark Self-Assessment Reminders
+
+These are not tasks — they are persistent quality signals the agent
+should internalise and check mentally before each commit:
+
+- **Am I being creative,** or just doing the obvious thing?
+- **Would another model produce exactly this?** If yes, go further.
+- **Is my commit message informative enough to be a changelog entry?**
+- **Have I left any "I'll do this later" stubs?** Finish them or file
+  a P3 task.
+- **Slop check:** remove any filler comments, redundant abstractions,
+  or copy-paste duplication before committing.
+
+---
+
+*Last updated by: human orchestrator via Claude Sonnet 4.6 — initial scaffold*
+*Agent: update this line at the end of every session with your model id and timestamp.*
+```
+
+---
+
