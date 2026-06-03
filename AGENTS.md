@@ -1,8 +1,3 @@
-Here is the fully refactored `AGENTS.md`. It is designed to be maximally clear and directive for capable non-frontier models, with explicit git discipline, priority grammar, and enough scaffolding that a model starting cold can orient itself in seconds.
-
----
-
-```markdown
 # AGENTS.md — Project Root · Unified Agent Contract & TODO
 
 > **This file is the single source of truth for project state.**
@@ -292,9 +287,6 @@ should internalise and check mentally before each commit:
 
 ---
 
-*Last updated by: human orchestrator via Claude Sonnet 4.6 — initial scaffold*
+*Last updated by: human orchestrator via Claude Sonnet 4.6 — initial scaffold 03-06-2026 00:40 MST*
 *Agent: update this line at the end of every session with your model id and timestamp.*
-```
-
----
 
