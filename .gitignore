@@ -1,19 +1,85 @@
-CMakeLists.txt.user
+# Build artifacts
+build/
+out/
+cmake-build-*/
+.cmake/
 CMakeCache.txt
-CMakeFiles
-CMakeScripts
-Testing
-Makefile
-cmake_install.cmake
-install_manifest.txt
-compile_commands.json
+CMakeFiles/
 CTestTestfile.cmake
-_deps
-CMakeUserPresets.json
+Testing/
+compile_commands.json
+Makefile
+_deps/
 
-# CLion
-#  JetBrains specific template is maintained in a separate JetBrains.gitignore that can
-#  be found at https://github.com/github/gitignore/blob/main/Global/JetBrains.gitignore
-#  and can be added to the global gitignore or merged into this file.  For a more nuclear
-#  option (not recommended) you can uncomment the following to ignore the entire idea folder.
-#cmake-build-*
+# Generated files
+generated/
+*.generated.hpp
+*.generated.cpp
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+*.qm
+*.qmlc
+*.jsc
+
+# Compiled object / binaries
+*.o
+*.obj
+*.so
+*.dll
+*.dylib
+*.exe
+*.a
+*.lib
+*.pdb
+*.ilk
+*.exp
+
+# IDE / editor
+.vscode/
+.idea/
+*.user
+*.user.*
+*.suo
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# Python tooling artifacts
+__pycache__/
+*.pyc
+*.pyo
+
+# Runtime / user-local data
+config/user/**
+!config/user/.gitkeep
+data/cache/**
+!data/cache/.gitkeep
+data/logs/**
+!data/logs/.gitkeep
+
+# Agent workspace transient files
+.agents_work/logs/**
+.agents_work/iterations/**
+.agents_work/recovery/**
+.agents_work/diagnostics/**
+
+# Scratch content from human orchestrator
+user_scratch/**
+!user_scratch/.gitkeep
+
+# Secrets and local-only credential files
+suno-all-devops-info-juicy.txt
+*devops-info*.txt
+*.env
+*.env.local
+*.key
+*.pem
+*.crt
+secrets/
+
+# Package output
+packaging/*/output/
+packaging/*/dist/
