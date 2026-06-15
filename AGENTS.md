@@ -105,7 +105,7 @@ is penalised. Aim for ≥ 1 commit per 30–45 min of substantive work.
 ## 3 · Repository & Directory Contract
 
 ```
-
+# NOTE: Not the complete hierarchy but just agent specifics of note early on. Feel free to update or remove this.
 /
 ├── AGENTS.md                  ← YOU ARE HERE; do not relocate
 ├── .agents_work/              ← agent scratch space
@@ -164,8 +164,16 @@ chore(agents): mark task 5.3 complete; add subtask for edge cases
 ## 5 · TODO Task List
 
 > Tasks are ordered within each priority tier by logical dependency.
-> Add subtasks freely; **do not remove any task** — that is the
-> human's role.
+> Add new tasks or subtasks freely; **do not remove any task** — that is the
+> human's role as a form of final code review to sign off on.
+> If all tasks in the current TODO Task list are complete then archive them
+> into a TODO archive file with a date time string appended to the file name
+> denoting time of completion which is where the user and other agent chat
+> sessions will very completeness and compliance.
+> If major changes are made to the inital project overall task of creating a full
+> mockup GUI that has as many interface aspects that an end user may interact
+> with is finished, and a user review is deemed appropriate, then your output
+> may he halted and the user informed of what to review for compliance.
 
 ---
 
