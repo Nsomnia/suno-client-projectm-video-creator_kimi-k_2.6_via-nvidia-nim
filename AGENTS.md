@@ -179,45 +179,99 @@ chore(agents): mark task 5.3 complete; add subtask for edge cases
 
 ### P0 — Critical
 
-- [ ] **5.0.1** Read and fully internalise this AGENTS.md before
-      touching any code. Confirm readiness with a brief status message
-      to the human. `P0`
+- [x] **5.0.1** Verify active model is `nvidia/moonshotai/kimi-k2.6`;
+      if not, HALT and alert user. `P0`
 
-- [ ] **5.0.2** Establish baseline: run existing test suite, capture
-      pass/fail counts, document in `.agents_work/session_notes/baseline.md`.
-      Commit result. `P0`
+- [~] **5.0.2** Set up build system: CMake, Ninja, CPM.cmake,
+      fetch Qt 6.8+ (minimum) via CPM. Confirm `CMakeLists.txt`
+      builds a dummy `main.cpp` successfully. Commit. `P0`
+      
+      > [!NOTE]
+      > **Primary Build Target:** Arch Linux (the user's main development workstation).
+      > Windows builds are actively supported and encouraged for a larger footprint.
+      > Build scripts and CI should always target both platforms where possible. `P0`
+
+- [ ] **5.0.3** Establish project directory structure per
+      INITIAL_PROMPT.md (apps/, libs/, qml/, ui/, assets/,
+      themes/, shaders/, docs/, tests/, third_party/, etc.).
+      Add root `.gitignore` entries for build dirs and artifacts. `P0`
 
 ---
 
-### P1 — High Priority
+### P1 — High Priority (Core GUI Shell)
 
-- [ ] **5.1.1** *(Describe your first major feature/task here)*
-      `P1`
+- [ ] **5.1.1** Implement C++ main application entry (`main.cpp`) and
+      QML engine setup. Ensure it loads a root `main.qml` and
+      compiles/launches with an empty window. Commit. `P1`
 
-- [ ] **5.1.2** *(Describe your second major feature/task here)*
-      `P1`
+- [ ] **5.1.2** Implement the main application shell: top bar (title,
+      window controls, global actions), central content area, and
+      status/footer bar. Wire into `main.qml`. Commit. `P1`
+
+- [ ] **5.1.3** Implement robust theme/style system: dark/cyberpunk
+      color palette, typography scales, spacing tokens. Expose via
+      QML singleton or central `Theme.qml` / `ThemeEngine`. Commit. `P1`
+
+- [ ] **5.1.4** Implement navigation architecture: sidebar/rail with
+      page icons/labels, view router (StackView or SwipeView), and
+      animated transitions between views. Commit. `P1`
 
 ---
 
-### P2 — Normal Priority
+### P1 — High Priority (Mockup Views)
 
-- [ ] **5.2.1** *(Planned scope item)* `P2`
+- [ ] **5.1.5** Create **Home/Dashboard** view with mock data, animated
+      widgets (stats, recent activity, quick actions), and responsive
+      layout. Commit. `P1`
 
-- [ ] **5.2.2** *(Planned scope item)* `P2`
+- [ ] **5.1.6** Create **Music Library** view with mock track data and
+      responsive list/grid layouts. Include search bar and sort controls
+      (non-functional / placeholder logic). Commit. `P1`
+
+- [ ] **5.1.7** Create **Visualizer** view with a placeholder
+      canvas/window ready for future projectM integration. Add subtle
+      animated shader background. Commit. `P1`
+
+- [ ] **5.1.8** Create **Suno Integration** view: placeholder UI for
+      API controls, generation history with mock data, and status
+      indicators. Commit. `P1`
+
+- [ ] **5.1.9** Create **Settings** view with placeholder UI for
+      toggles, preferences, and theme selection. Commit. `P1`
+
+- [ ] **5.1.10** Create **Timeline/Export** view with placeholder
+      UI for future orchestration features: track strip, markers,
+      export controls. Commit. `P1`
+
+---
+
+### P2 — Normal Priority (UI Components & Polish)
+
+- [ ] **5.2.1** Build a reusable UI components library in isolation:
+      custom buttons, cards, panels, sliders, knobs. Store under
+      `qml/components/` with individual `.qml` files per component.
+      Commit. `P2`
+
+- [ ] **5.2.2** Add animated backgrounds, basic shader effects,
+      and visual polish across views (blurs, glows, gradients,
+      subtle motion). Commit. `P2`
+
+- [ ] **5.2.3** Implement responsive layout logic: minimum window
+      sizes, reflow rules, and mobile/tablet breakpoints if applicable.
+      Test at common resolutions. Commit. `P2`
 
 ---
 
 ### P3 — Stretch / Nice-to-Have
 
-- [ ] **5.3.1** *(Enhancement or polish item)* `P3`
+- [ ] **5.3.1** Add a diagnostic overlay (FPS counter, build info,
+      version hash display) toggleable via a hotkey or settings
+      toggle. Commit. `P3`
 
----
-
-### ~ — Exploratory / Open-Ended
-
-- [ ] **5.~.1** Research and document at least two approaches in
-      `.agents_work/experiments/` before committing to any
-      implementation path. Present findings to human. `~`
+- [ ] **5.3.2** Create initial `BUILDING.md` with build prerequisites,
+      step-by-step instructions, and troubleshooting notes. Update
+      `README.md` with project description, screenshot placeholders,
+      and tech stack overview. Commit. `P3`
 
 ---
 
@@ -285,16 +339,17 @@ the affected task:
 These are not tasks — they are persistent quality signals the agent
 should internalise and check mentally before each commit:
 
-- **Am I being creative,** or just doing the obvious thing?
-- **Would another model produce exactly this?** If yes, go further.
-- **Is my commit message informative enough to be a changelog entry?**
+- **Am I being creative,** or just doing the obvious and/or minimal thing(s)?
+- **Would another model produce exactly this?** If yes, or even lesser, go further.
+- **Is my commit message informative enough to be a changelog entry?** This might be noted as "going the extra mile" by human benbchark judges.
 - **Have I left any "I'll do this later" stubs?** Finish them or file
-  a P3 task.
-- **Slop check:** remove any filler comments, redundant abstractions,
-  or copy-paste duplication before committing.
+  as a task in this "TODO" document with a base priority of P3. NOTE: AGENTS.md files can be written in **anu** directory and thusly anything textual inlcuding notes or lesser small TODO assignments can be made anywhere which will be read by LLM agents when traversing into the containing directory.
+- **Slop check:** remove any [unnecessary] filler comments, redundant abstractions,
+  or copy-paste duplication before committing. Take a brief moment and allocation of appropriate tokens to think: "is this setup and implmeneted well for the long term maintainability of this project?".
 
 ---
 
-*Last updated by: human orchestrator via Claude Sonnet 4.6 — initial scaffold 03-06-2026 00:40 MST*
-*Agent: update this line at the end of every session with your model id and timestamp.*
+*First Drafted by: updated by: human orchestrator via Claude Sonnet 4.6 — initial scaffold 03-06-2026 00:40 MST*
+*Last Updated by: the user — general housekeeping and light refactorings for clarity*
+*Agent: update the above line at the end of every session with a one-liner of modifications, your model id, and a timestamp.*
 

@@ -39,6 +39,7 @@ ui_*.h
 # IDE / editor
 .vscode/
 .idea/
+.vs/
 *.user
 *.user.*
 *.suo
@@ -46,6 +47,7 @@ ui_*.h
 *~
 .DS_Store
 Thumbs.db
+.history/
 
 # Python tooling artifacts
 __pycache__/
